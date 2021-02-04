@@ -101,10 +101,98 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public Cursor wednesday_first_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
-        return myDataBase.query("wednesdayfirst", null, null, null, null, null, null);
+
+
+////////////////////////////////////////////****** Data Pulling From Database*************////////////////////////////////////////////////////////\
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //Sunday Data Pull
+    ////////////////////////////////
+    public Cursor sunday_first_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("sundayfirst", null, null, null, null, null, null);
+    }
+      public Cursor sunday_second_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("sundaysecond", null, null, null, null, null, null);
+    }
+      public Cursor sunday_third_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("sundaythird", null, null, null, null, null, null);
+    }
+    //End
+    //////////////////////
+
+
+//Monday Data Pull
+    ////////////////////////////////
+    public Cursor monday_first_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("mondayfirst", null, null, null, null, null, null);
+    }
+      public Cursor monday_second_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("mondaysecond", null, null, null, null, null, null);
+    }
+      public Cursor monday_third_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("mondaythird", null, null, null, null, null, null);
+    }
+    //End
+    //////////////////////
+
+//Tuesday Data Pull
+    ////////////////////////////////
+    public Cursor tuesday_first_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("tuesdayfirst", null, null, null, null, null, null);
+    }
+      public Cursor  tuesday_second_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("tuesdaysecond", null, null, null, null, null, null);
+    }
+      public Cursor  tuesday_third_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("tuesdaythird", null, null, null, null, null, null);
+    }
+    public Cursor  tuesday_fourth_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("tuesdayfourth", null, null, null, null, null, null);
+    }
+    //End
+    //////////////////////
+
+//Wednesday Data Pull
+    ////////////////////////////////
+public Cursor wednesday_first_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+    return myDataBase.query("wednesdayfirst", null, null, null, null, null, null);
+}
+public Cursor wednesday_second_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+    return myDataBase.query("wednesdaysecond", null, null, null, null, null, null);
+}
+public Cursor wednesday_third_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+    return myDataBase.query("wednesdaythird", null, null, null, null, null, null);
+}
+public Cursor wednesday_fourth_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+    return myDataBase.query("wednesdayfourth", null, null, null, null, null, null);
+}
+
+    //End
+    //////////////////////
+
+
+    //Thursday Data Pull
+    ////////////////////////////////
+    public Cursor thursday_first_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("thursdayfirst", null, null, null, null, null, null);
     }
 
+    public Cursor thursday_second_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("thursdaysecond", null, null, null, null, null, null);
+    }
+
+    public Cursor thursday_third_cursor(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
+        return myDataBase.query("thursday_third", null, null, null, null, null, null);
+    }
+
+    //End
+    //////////////////////
 
 
 
