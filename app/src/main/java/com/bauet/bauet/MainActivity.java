@@ -1,5 +1,7 @@
 package com.bauet.bauet;
 
+import android.app.Notification;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,10 +10,18 @@ import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.database.SQLException;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import android.database.Cursor;
 import android.database.SQLException;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -21,6 +31,8 @@ import java.io.IOException;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     //f=first
     //s=second
@@ -64,10 +76,7 @@ public class MainActivity extends AppCompatActivity {
     protected  String day;
     private   BroadcastReceiver minuteUpdate;
 
-    //CLass scedule Area
-    protected TextView CLASS_NAME;
-    protected TextView CLASS_TIME;
-    protected TextView AM_PM;
+
 
     //Day Area
     public String day_of_Sunday = "Sunday";
@@ -77,12 +86,15 @@ public class MainActivity extends AppCompatActivity {
     public String day_of_Thursday = "Thursday";
 
   //Main Function Area
+
+    private NotificationManagerCompat NotificationManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        NotificationManager = NotificationManagerCompat.from(this);
         DatabaseLogic();
 
 
@@ -90,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-     //Auto Update of Scedule
+
+    //Auto Update of Scedule
     public void startMinuteUpdate()
     {
         IntentFilter intentFilter = new IntentFilter();
@@ -120,6 +133,19 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(minuteUpdate);
     }
 
+
+
+    protected  void notttt()
+    {
+        String title_noti = "Class Time Alarm";
+        String dis_noti = "Next Class is : CSE-2215 ! ";
+        Notification notification = new NotificationCompat.Builder(this, NotificationBasedClass.CHANNEL_ID_1)
+                .setSmallIcon(R.drawable.ic_clock)
+                .setContentTitle(dis_noti)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .build();
+        NotificationManager.notify(1,notification);
+    }
 
 
 
@@ -152,9 +178,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "Successfully Imported", Toast.LENGTH_SHORT).show();
         //String Pull from String XML
 
-        Resources res = getResources();
-      int wed_first_hour = 01;
-      int wed_first_minute = 00;
+
 
 
 
@@ -181,9 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Time Pull
         Calendar cal = Calendar.getInstance();
-        String cur_Hour = String.valueOf(cal.get(Calendar.HOUR));
-        String cur_Minute = String.valueOf(cal.get(Calendar.MINUTE));
-        int am_pm = cal.get(Calendar.AM_PM);
+
         String cur_fullTime;
         TimePull tpull  = new TimePull();
         cur_fullTime = tpull.TimePull();
@@ -196,6 +218,11 @@ public class MainActivity extends AppCompatActivity {
         //Current Day Pulling
         //////******
 
+
+
+
+
+
         ///////Sunday Class Time Update//////////
         ///////////////////////////////////////
         if(reallyDy.equals(day_of_Sunday))
@@ -203,13 +230,15 @@ public class MainActivity extends AppCompatActivity {
             //Sunday First Class
             if(cur_fullTime.equals(first_class_up))
             {
+
                 sun_f = myDbHelper.sunday_first_cursor("sundayfirst", null, null, null, null, null, null);
                 Toast.makeText(MainActivity.this, "Its Sunday First Class", Toast.LENGTH_SHORT).show();
-                if (w_f.moveToFirst()) {
+                if (sun_f.moveToFirst()) {
                     clock_text.setText(sun_f.getString(0));
                     am_pm_text.setText(sun_f.getString(1));
                     class_text.setText(sun_f.getString(2));
                 }
+                notttt();
             }
              //Sunday Second Class
             if(cur_fullTime.equals(fourth_class_up))
@@ -470,8 +499,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
 
