@@ -4,18 +4,38 @@
     <string name="welcome_user_name">Fardin</string>
     <string name="batch_title">BATCH:</string>
     <string name="batch_name">9TH</string>
-    <string name="class_schedule_title">Class Schedule</string>
+    <string name="class_schedule_title">Class Card</string>
+
+    <string name="class_going">Next Class / Ongoing Class</string>
+
+    <string name="all_class_title">Todays All Class Schedule</string>
+
+    <string name="class_schedule_title_2">Class Schedule</string>
+
     <string name="today_is_title">Today :</string>
     <string name="today_is">Monday</string>
     <string name="class_time">08:15</string>
     <string name="am_or_pm">AM</string>
     <string name="class_is">Math:2247</string>
+    <string name="teacher_name">Md. Akher Chowdhury</string>
+
+
+
 
 
     <string name="WEDNESDAY_FIRST_CLASS">10:06</string>
     <string name="WEDNESDAY_SECOND_CLASS">9:16</string>
     <string name="WEDNESDAY_THIRD_CLASS">10:42</string>
 
+
+
+
+
+
+      <string name="MCLASS_TIME">00.00</string>
+      <string name="MCLASS_AM_PM">AM</string>
+      <string name="MCLASS_TEACHER">Md. Akher Chowdhury</string>
+      <string name="MCLASS_CLASS">Math:2247</string>
 
 
 

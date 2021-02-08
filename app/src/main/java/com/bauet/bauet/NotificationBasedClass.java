@@ -6,6 +6,7 @@ import android.os.Build;
 
 public class NotificationBasedClass extends Application {
 public static final String CHANNEL_ID_1 ="FARDIN1";
+public static final String CHANNEL_ID_2 ="FARDIN2";
 
     @Override
     public void onCreate() {
@@ -21,10 +22,18 @@ public static final String CHANNEL_ID_1 ="FARDIN1";
                    CHANNEL_ID_1,
                    "Channel 1",
                    NotificationManager.IMPORTANCE_HIGH
+
            );
-           channel1.setDescription("Its Class Time, Join The Class Right Now");
+           NotificationChannel channel2 = new NotificationChannel(
+                   CHANNEL_ID_2,
+                   "Channel 2",
+                   NotificationManager.IMPORTANCE_DEFAULT
+
+           );
+
            NotificationManager manager = getSystemService(NotificationManager.class);
            manager.createNotificationChannel(channel1);
+           manager.createNotificationChannel(channel2);
        }
    }
 }

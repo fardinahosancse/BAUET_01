@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import android.database.Cursor;
 import android.database.SQLException;
@@ -29,6 +30,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Calendar;
+
+import static com.bauet.bauet.NotificationBasedClass.CHANNEL_ID_2;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,17 +98,38 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         NotificationManager = NotificationManagerCompat.from(this);
+
+
+
         DatabaseLogic();
 
 
+        //Sceondary Menu Opener
+        //This Button Simply open the Class Scedule Activity
+         ImageButton class_scedule_button = (ImageButton) findViewById(R.id.class_scedule_button);
+         class_scedule_button.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+               ClassScedule_ActivityOpener();
+             }
+         });
 
     }
 
+
+    
+       protected  void ClassScedule_ActivityOpener()
+       {
+           Intent intent = new Intent(this, class_scedule_back.class);
+           startActivity(intent);
+       }
 
 
     //Auto Update of Scedule
     public void startMinuteUpdate()
     {
+
+
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_TIME_TICK);
         minuteUpdate = new BroadcastReceiver() {
@@ -135,7 +159,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    protected  void notttt()
+
+
+
+    public  void notttt()
     {
         String title_noti = "Class Time Alarm";
         String dis_noti = "Next Class is : CSE-2215 ! ";
