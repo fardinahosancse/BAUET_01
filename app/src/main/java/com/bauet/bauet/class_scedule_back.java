@@ -98,8 +98,7 @@ public class class_scedule_back extends AppCompatActivity {
         setContentView(R.layout.activity_class_scedule_back);
 
 
-
-        Logic();
+        A_A_A();
 
     }
 
@@ -117,7 +116,8 @@ public class class_scedule_back extends AppCompatActivity {
 
                 //Diagonistic Toast to Test that minute is actually Updating or not
                 Toast.makeText(class_scedule_back.this, "Minute is Changing!", Toast.LENGTH_SHORT).show();
-               Logic();
+
+             A_A_A();
 
             }
         };
@@ -138,8 +138,15 @@ public class class_scedule_back extends AppCompatActivity {
 
 
 
-
-
+  private void A_A_A()
+  {
+      Logic();
+      Sunday_Class_Blue();
+      Monday_Class_Blue();
+      Tuesday_Class_Blue();
+      Wenesday_Class_Blue();
+      Thusday_Class_Blue();
+  }
 
 
 
@@ -242,15 +249,6 @@ public class class_scedule_back extends AppCompatActivity {
                 am_pm.setText(sun_f.getString(1));
                 class_name.setText(sun_f.getString(2));
                 teacher_name.setText(sun_f.getString(3));
-
-
-
-
-
-
-
-
-
 
             }
             //Sunday Second Class
@@ -503,29 +501,601 @@ public class class_scedule_back extends AppCompatActivity {
         }
 
     }
+    //ROUTINE DATA BINDING
+    public  void Sunday_Class_Blue () {
 
- protected  void Sunday_Class_Blue()
- {
-
-
-
-
-
-
+     //Sunday Cursor Variable
+     Cursor M_sun_f = null;
+     Cursor M_sun_s = null;
+     Cursor M_sun_t = null;
 
 
 
 
+     //BlueField_FirstCLass
+     TextView MCLOCK_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_time);
+     TextView MAMPM_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_am_pm);
+     ImageView MTEACHERGENDER_FA_BLUE = (ImageView) findViewById(R.id.blue_teacher_gender);
+     TextView MTEACHER_FA_BLUE = (TextView) findViewById(R.id.blue_teacher_name);
+     TextView MCLASSNAME_FA_BLUE = (TextView) findViewById(R.id.blue_class_is);
+     //greenField_Second
+     TextView MCLOCK_SEC_green = (TextView) findViewById(R.id.green_first_clock_time);
+     TextView MAMPM_SEC_green = (TextView) findViewById(R.id.green_first_clock_am_pm);
+     ImageView MTEACHERGENDER_SEC_green = (ImageView) findViewById(R.id.green_teacher_gender);
+     TextView MTEACHER_SEC_green = (TextView) findViewById(R.id.green_teacher_name);
+     TextView MCLASSNAME_SEC_green = (TextView) findViewById(R.id.green_class_is);
+
+     //orangeField_Third
+     TextView MCLOCK_THI_orange = (TextView) findViewById(R.id.orange_first_clock_time);
+     TextView MAMPM_THI_orange = (TextView) findViewById(R.id.orange_first_clock_am_pm);
+     ImageView MTEACHERGENDER_THI_orange = (ImageView) findViewById(R.id.orange_teacher_gender);
+     TextView MTEACHER_THI_orange = (TextView) findViewById(R.id.orange_teacher_name);
+     TextView MCLASSNAME_THI_orange = (TextView) findViewById(R.id.orange_class_is);
+
+     //yellowField_Fourth
+     TextView MCLOCK_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_time);
+     TextView MAMPM_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_am_pm);
+     ImageView MTEACHERGENDER_FO_yellow = (ImageView) findViewById(R.id.yellow_teacher_gender);
+     TextView MTEACHER_FO_yellow = (TextView) findViewById(R.id.yellow_teacher_name);
+     TextView MCLASSNAME_FO_yellow = (TextView) findViewById(R.id.yellow_class_is);
 
 
+     Calendar cal = Calendar.getInstance();
+     String cur_fullTime;
+     TimePull tpull = new TimePull();
+     cur_fullTime = tpull.TimePull();
 
 
+     ///////******
+     //Current Day Pulling
+     TimePull day_of_day = new TimePull();
+     String reallyDy = day_of_day.DayPull();
+     //Current Day Pulling
+     //////******
 
 
+     DatabaseHelper myDbHelper = new DatabaseHelper(class_scedule_back.this);
+     try {
+         myDbHelper.createDataBase();
+     } catch (IOException ioe) {
+         throw new Error("Unable to create database");
+     }
+     try {
+         myDbHelper.openDataBase();
+     } catch (SQLException sqle) {
+         throw sqle;
+     }
 
+
+     if (reallyDy.equals(day_of_Sunday)) {
+         //Sunday First Class
+
+         M_sun_f = myDbHelper.sunday_first_cursor("sundayfirst", null, null, null, null, null, null);
+         Toast.makeText(class_scedule_back.this, "Its Sunday First Class", Toast.LENGTH_SHORT).show();
+         if (M_sun_f.moveToFirst()) {
+             //FIRST CLASS_SUNDAY
+             MCLOCK_FA_BLUE.setText(M_sun_f.getString(0));
+             MAMPM_FA_BLUE.setText(M_sun_f.getString(1));
+             MTEACHERGENDER_FA_BLUE.setImageResource(R.drawable.ic_teacher_male);
+             MCLASSNAME_FA_BLUE.setText(M_sun_f.getString(2));
+             MTEACHER_FA_BLUE.setText(M_sun_f.getString(3));
+
+         }
+         //Second Class
+
+         M_sun_s = myDbHelper.sunday_second_cursor("sundaysecond", null, null, null, null, null, null);
+         Toast.makeText(class_scedule_back.this, "Its Sunday First Class", Toast.LENGTH_SHORT).show();
+         if (M_sun_s.moveToFirst()) {
+             //FIRST CLASS_SUNDAY
+             MCLOCK_SEC_green.setText(M_sun_s.getString(0));
+             MAMPM_SEC_green.setText(M_sun_s.getString(1));
+             MTEACHERGENDER_SEC_green.setImageResource(R.drawable.ic_teacher_male);
+             MCLASSNAME_SEC_green.setText(M_sun_s.getString(2));
+             MTEACHER_SEC_green.setText(M_sun_s.getString(3));
+
+         }
+
+         M_sun_t = myDbHelper.sunday_second_cursor("sundaysecond", null, null, null, null, null, null);
+         Toast.makeText(class_scedule_back.this, "Its Sunday First Class", Toast.LENGTH_SHORT).show();
+         if (M_sun_t.moveToFirst()) {
+             //FIRST CLASS_SUNDAY
+             MCLOCK_THI_orange.setText(M_sun_t.getString(0));
+             MAMPM_THI_orange.setText(M_sun_t.getString(1));
+             MTEACHERGENDER_THI_orange.setImageResource(R.drawable.ic_teacher_male);
+             MCLASSNAME_THI_orange.setText(M_sun_t.getString(2));
+             MTEACHER_THI_orange.setText(M_sun_t.getString(3));
+
+         }
+
+
+     }
 
 
  }
+    public  void Monday_Class_Blue () {
+        //Monday Cursor Variable
+        Cursor M_mon_f = null;
+        Cursor M_mon_s = null;
+        Cursor M_mon_t = null;
+
+
+        //BlueField_FirstCLass
+        TextView MCLOCK_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_time);
+        TextView MAMPM_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_am_pm);
+        ImageView MTEACHERGENDER_FA_BLUE = (ImageView) findViewById(R.id.blue_teacher_gender);
+        TextView MTEACHER_FA_BLUE = (TextView) findViewById(R.id.blue_teacher_name);
+        TextView MCLASSNAME_FA_BLUE = (TextView) findViewById(R.id.blue_class_is);
+        //greenField_Second
+        TextView MCLOCK_SEC_green = (TextView) findViewById(R.id.green_first_clock_time);
+        TextView MAMPM_SEC_green = (TextView) findViewById(R.id.green_first_clock_am_pm);
+        ImageView MTEACHERGENDER_SEC_green = (ImageView) findViewById(R.id.green_teacher_gender);
+        TextView MTEACHER_SEC_green = (TextView) findViewById(R.id.green_teacher_name);
+        TextView MCLASSNAME_SEC_green = (TextView) findViewById(R.id.green_class_is);
+
+        //orangeField_Third
+        TextView MCLOCK_THI_orange = (TextView) findViewById(R.id.orange_first_clock_time);
+        TextView MAMPM_THI_orange = (TextView) findViewById(R.id.orange_first_clock_am_pm);
+        ImageView MTEACHERGENDER_THI_orange = (ImageView) findViewById(R.id.orange_teacher_gender);
+        TextView MTEACHER_THI_orange = (TextView) findViewById(R.id.orange_teacher_name);
+        TextView MCLASSNAME_THI_orange = (TextView) findViewById(R.id.orange_class_is);
+
+        //yellowField_Fourth
+        TextView MCLOCK_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_time);
+        TextView MAMPM_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_am_pm);
+        ImageView MTEACHERGENDER_FO_yellow = (ImageView) findViewById(R.id.yellow_teacher_gender);
+        TextView MTEACHER_FO_yellow = (TextView) findViewById(R.id.yellow_teacher_name);
+        TextView MCLASSNAME_FO_yellow = (TextView) findViewById(R.id.yellow_class_is);
+
+
+        Calendar cal = Calendar.getInstance();
+        String cur_fullTime;
+        TimePull tpull = new TimePull();
+        cur_fullTime = tpull.TimePull();
+
+
+        ///////******
+        //Current Day Pulling
+        TimePull day_of_day = new TimePull();
+        String reallyDy = day_of_day.DayPull();
+        //Current Day Pulling
+        //////******
+
+
+        DatabaseHelper myDbHelper = new DatabaseHelper(class_scedule_back.this);
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        try {
+            myDbHelper.openDataBase();
+        } catch (SQLException sqle) {
+            throw sqle;
+        }
+
+
+        if (reallyDy.equals(day_of_Monday)) {
+
+            M_mon_f = myDbHelper.monday_first_cursor("mondayfirst", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Monday First Class", Toast.LENGTH_SHORT).show();
+
+            if (M_mon_f.moveToFirst()) {
+
+                MCLOCK_FA_BLUE.setText(M_mon_f.getString(0));
+                MAMPM_FA_BLUE.setText(M_mon_f.getString(1));
+                MTEACHERGENDER_FA_BLUE.setImageResource(R.drawable.ic_teacher_male);
+                MCLASSNAME_FA_BLUE.setText(M_mon_f.getString(2));
+                MTEACHER_FA_BLUE.setText(M_mon_f.getString(3));
+
+
+            }
+
+            //Monday Second Class
+                M_mon_s = myDbHelper.monday_second_cursor("mondaysecond", null, null, null, null, null, null);
+                Toast.makeText(class_scedule_back.this, "Its Monday Second Class", Toast.LENGTH_SHORT).show();
+                if (M_mon_s.moveToFirst()) {
+                    MCLOCK_SEC_green.setText(M_mon_s.getString(0));
+                    MAMPM_SEC_green.setText(M_mon_s.getString(1));
+                    MTEACHERGENDER_SEC_green.setImageResource(R.drawable.ic_teacher_mam);
+                    MCLASSNAME_SEC_green.setText(M_mon_s.getString(2));
+                    MTEACHER_SEC_green.setText(M_mon_s.getString(3));
+
+                }
+
+            //Monday Third Class
+
+                M_mon_t = myDbHelper.monday_third_cursor("mondaythird", null, null, null, null, null, null);
+                Toast.makeText(class_scedule_back.this, "Its Monday Third Class", Toast.LENGTH_SHORT).show();
+                if (M_mon_t.moveToFirst()) {
+
+                    MCLOCK_THI_orange.setText(M_mon_t.getString(0));
+                    MAMPM_THI_orange.setText(M_mon_t.getString(1));
+                    MTEACHERGENDER_THI_orange.setImageResource(R.drawable.ic_teacher_mam);
+                    MCLASSNAME_THI_orange.setText(M_mon_t.getString(2));
+                    MTEACHER_THI_orange.setText(M_mon_t.getString(3));
+
+
+                }
+
+
+        }
+
+
+    }
+    public  void Tuesday_Class_Blue () {
+        //Monday Cursor Variable
+        //Tuesday Cursor Variable
+        Cursor M_Tues_f = null;
+        Cursor M_Tues_s = null;
+        Cursor M_Tues_t = null;
+        Cursor M_Tues_fourth = null;
+
+
+        //BlueField_FirstCLass
+        TextView MCLOCK_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_time);
+        TextView MAMPM_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_am_pm);
+        ImageView MTEACHERGENDER_FA_BLUE = (ImageView) findViewById(R.id.blue_teacher_gender);
+        TextView MTEACHER_FA_BLUE = (TextView) findViewById(R.id.blue_teacher_name);
+        TextView MCLASSNAME_FA_BLUE = (TextView) findViewById(R.id.blue_class_is);
+        //greenField_Second
+        TextView MCLOCK_SEC_green = (TextView) findViewById(R.id.green_first_clock_time);
+        TextView MAMPM_SEC_green = (TextView) findViewById(R.id.green_first_clock_am_pm);
+        ImageView MTEACHERGENDER_SEC_green = (ImageView) findViewById(R.id.green_teacher_gender);
+        TextView MTEACHER_SEC_green = (TextView) findViewById(R.id.green_teacher_name);
+        TextView MCLASSNAME_SEC_green = (TextView) findViewById(R.id.green_class_is);
+
+        //orangeField_Third
+        TextView MCLOCK_THI_orange = (TextView) findViewById(R.id.orange_first_clock_time);
+        TextView MAMPM_THI_orange = (TextView) findViewById(R.id.orange_first_clock_am_pm);
+        ImageView MTEACHERGENDER_THI_orange = (ImageView) findViewById(R.id.orange_teacher_gender);
+        TextView MTEACHER_THI_orange = (TextView) findViewById(R.id.orange_teacher_name);
+        TextView MCLASSNAME_THI_orange = (TextView) findViewById(R.id.orange_class_is);
+
+        //yellowField_Fourth
+        TextView MCLOCK_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_time);
+        TextView MAMPM_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_am_pm);
+        ImageView MTEACHERGENDER_FO_yellow = (ImageView) findViewById(R.id.yellow_teacher_gender);
+        TextView MTEACHER_FO_yellow = (TextView) findViewById(R.id.yellow_teacher_name);
+        TextView MCLASSNAME_FO_yellow = (TextView) findViewById(R.id.yellow_class_is);
+
+
+        Calendar cal = Calendar.getInstance();
+        String cur_fullTime;
+        TimePull tpull = new TimePull();
+        cur_fullTime = tpull.TimePull();
+
+
+        ///////******
+        //Current Day Pulling
+        TimePull day_of_day = new TimePull();
+        String reallyDy = day_of_day.DayPull();
+        //Current Day Pulling
+        //////******
+
+
+        DatabaseHelper myDbHelper = new DatabaseHelper(class_scedule_back.this);
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        try {
+            myDbHelper.openDataBase();
+        } catch (SQLException sqle) {
+            throw sqle;
+        }
+
+
+        if (reallyDy.equals(day_of_Tuesday)) {
+
+            M_Tues_f = myDbHelper.tuesday_first_cursor("tuesdayfirst", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday First Class", Toast.LENGTH_SHORT).show();
+
+            if (M_Tues_f.moveToFirst()) {
+
+                MCLOCK_FA_BLUE.setText(M_Tues_f.getString(0));
+                MAMPM_FA_BLUE.setText(M_Tues_f.getString(1));
+                MTEACHERGENDER_FA_BLUE.setImageResource(R.drawable.ic_teacher_male);
+                MCLASSNAME_FA_BLUE.setText(M_Tues_f.getString(2));
+                MTEACHER_FA_BLUE.setText(M_Tues_f.getString(3));
+
+
+            }
+
+            //Tuesday Second Class
+            M_Tues_s = myDbHelper.tuesday_second_cursor("tuesdaysecond", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Second Class", Toast.LENGTH_SHORT).show();
+            if (M_Tues_s.moveToFirst()) {
+                MCLOCK_SEC_green.setText(M_Tues_s.getString(0));
+                MAMPM_SEC_green.setText(M_Tues_s.getString(1));
+                MTEACHERGENDER_SEC_green.setImageResource(R.drawable.ic_teacher_mam);
+                MCLASSNAME_SEC_green.setText(M_Tues_s.getString(2));
+                MTEACHER_SEC_green.setText(M_Tues_s.getString(3));
+
+            }
+
+            //Tuesday Third Class
+
+            M_Tues_t = myDbHelper.tuesday_third_cursor("teusdaythird", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Third Class", Toast.LENGTH_SHORT).show();
+            if (M_Tues_t.moveToFirst()) {
+
+                MCLOCK_THI_orange.setText(M_Tues_t.getString(0));
+                MAMPM_THI_orange.setText(M_Tues_t.getString(1));
+                MTEACHERGENDER_THI_orange.setImageResource(R.drawable.ic_teacher_mam);
+                MCLASSNAME_THI_orange.setText(M_Tues_t.getString(2));
+                MTEACHER_THI_orange.setText(M_Tues_t.getString(3));
+
+
+            }
+
+            //Tuesday Fourth Class
+            M_Tues_fourth = myDbHelper.tuesday_fourth_cursor("tuesdayfourth", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Fourth Class", Toast.LENGTH_SHORT).show();
+            if (M_Tues_fourth.moveToFirst()) {
+
+                MCLOCK_FO_yellow.setText(M_Tues_fourth.getString(0));
+                MAMPM_FO_yellow.setText(M_Tues_fourth.getString(1));
+                MTEACHERGENDER_FO_yellow.setImageResource(R.drawable.ic_teacher_male);
+                MCLASSNAME_FO_yellow.setText(M_Tues_fourth.getString(2));
+                MTEACHER_FO_yellow.setText(M_Tues_fourth.getString(3));
+
+
+            }
+
+
+        }
+
+
+    }
+    public void Wenesday_Class_Blue () {
+
+
+        //Wednesday Cursor Variable
+
+        Cursor M_w_f = null;
+        Cursor M_w_s = null;
+        Cursor M_w_t = null;
+        Cursor M_w_fourth = null;
+
+
+        //BlueField_FirstCLass
+        TextView MCLOCK_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_time);
+        TextView MAMPM_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_am_pm);
+        ImageView MTEACHERGENDER_FA_BLUE = (ImageView) findViewById(R.id.blue_teacher_gender);
+        TextView MTEACHER_FA_BLUE = (TextView) findViewById(R.id.blue_teacher_name);
+        TextView MCLASSNAME_FA_BLUE = (TextView) findViewById(R.id.blue_class_is);
+        //greenField_Second
+        TextView MCLOCK_SEC_green = (TextView) findViewById(R.id.green_first_clock_time);
+        TextView MAMPM_SEC_green = (TextView) findViewById(R.id.green_first_clock_am_pm);
+        ImageView MTEACHERGENDER_SEC_green = (ImageView) findViewById(R.id.green_teacher_gender);
+        TextView MTEACHER_SEC_green = (TextView) findViewById(R.id.green_teacher_name);
+        TextView MCLASSNAME_SEC_green = (TextView) findViewById(R.id.green_class_is);
+
+        //orangeField_Third
+        TextView MCLOCK_THI_orange = (TextView) findViewById(R.id.orange_first_clock_time);
+        TextView MAMPM_THI_orange = (TextView) findViewById(R.id.orange_first_clock_am_pm);
+        ImageView MTEACHERGENDER_THI_orange = (ImageView) findViewById(R.id.orange_teacher_gender);
+        TextView MTEACHER_THI_orange = (TextView) findViewById(R.id.orange_teacher_name);
+        TextView MCLASSNAME_THI_orange = (TextView) findViewById(R.id.orange_class_is);
+
+        //yellowField_Fourth
+        TextView MCLOCK_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_time);
+        TextView MAMPM_FO_yellow = (TextView) findViewById(R.id.yellow_first_clock_am_pm);
+        ImageView MTEACHERGENDER_FO_yellow = (ImageView) findViewById(R.id.yellow_teacher_gender);
+        TextView MTEACHER_FO_yellow = (TextView) findViewById(R.id.yellow_teacher_name);
+        TextView MCLASSNAME_FO_yellow = (TextView) findViewById(R.id.yellow_class_is);
+
+
+        Calendar cal = Calendar.getInstance();
+        String cur_fullTime;
+        TimePull tpull = new TimePull();
+        cur_fullTime = tpull.TimePull();
+
+
+        ///////******
+        //Current Day Pulling
+        TimePull day_of_day = new TimePull();
+        String reallyDy = day_of_day.DayPull();
+        //Current Day Pulling
+        //////******
+
+
+        DatabaseHelper myDbHelper = new DatabaseHelper(class_scedule_back.this);
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        try {
+            myDbHelper.openDataBase();
+        } catch (SQLException sqle) {
+            throw sqle;
+        }
+
+
+        if (reallyDy.equals(day_of_Wednesday)) {
+
+            M_w_f = myDbHelper.wednesday_first_cursor("wednesdayfirst", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday First Class", Toast.LENGTH_SHORT).show();
+
+            if (M_w_f.moveToFirst()) {
+
+                MCLOCK_FA_BLUE.setText(M_w_f.getString(0));
+                MAMPM_FA_BLUE.setText(M_w_f.getString(1));
+                MTEACHERGENDER_FA_BLUE.setImageResource(R.drawable.ic_teacher_mam);
+                MCLASSNAME_FA_BLUE.setText(M_w_f.getString(2));
+                MTEACHER_FA_BLUE.setText(M_w_f.getString(3));
+
+
+            }
+
+            //Tuesday Second Class
+            M_w_s = myDbHelper.wednesday_second_cursor("wednesdaysecond", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Second Class", Toast.LENGTH_SHORT).show();
+            if (M_w_s.moveToFirst()) {
+                MCLOCK_SEC_green.setText(M_w_s.getString(0));
+                MAMPM_SEC_green.setText(M_w_s.getString(1));
+                MTEACHERGENDER_SEC_green.setImageResource(R.drawable.ic_teacher_male);
+                MCLASSNAME_SEC_green.setText(M_w_s.getString(2));
+                MTEACHER_SEC_green.setText(M_w_s.getString(3));
+
+            }
+
+            //Tuesday Third Class
+
+            M_w_t = myDbHelper.wednesday_third_cursor("wednesdaythird", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Third Class", Toast.LENGTH_SHORT).show();
+            if (M_w_t.moveToFirst()) {
+
+                MCLOCK_THI_orange.setText(M_w_t.getString(0));
+                MAMPM_THI_orange.setText(M_w_t.getString(1));
+                MTEACHERGENDER_THI_orange.setImageResource(R.drawable.ic_teacher_mam);
+                MCLASSNAME_THI_orange.setText(M_w_t.getString(2));
+                MTEACHER_THI_orange.setText(M_w_t.getString(3));
+
+
+            }
+
+            //Tuesday Fourth Class
+            M_w_fourth = myDbHelper.wednesday_fourth_cursor("wednesdayfourth", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Fourth Class", Toast.LENGTH_SHORT).show();
+            if (M_w_fourth.moveToFirst()) {
+
+                MCLOCK_FO_yellow.setText(M_w_fourth.getString(0));
+                MAMPM_FO_yellow.setText(M_w_fourth.getString(1));
+                MTEACHERGENDER_FO_yellow.setImageResource(R.drawable.ic_teacher_male);
+                MCLASSNAME_FO_yellow.setText(M_w_fourth.getString(2));
+                MTEACHER_FO_yellow.setText(M_w_fourth.getString(3));
+
+
+            }
+
+
+        }
+
+
+    }
+    public  void Thusday_Class_Blue () {
+
+
+        Cursor M_Th_f = null;
+        Cursor M_Th_s = null;
+        Cursor M_Th_t = null;
+
+
+        //BlueField_FirstCLass
+        TextView MCLOCK_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_time);
+        TextView MAMPM_FA_BLUE = (TextView) findViewById(R.id.blue_first_clock_am_pm);
+        ImageView MTEACHERGENDER_FA_BLUE = (ImageView) findViewById(R.id.blue_teacher_gender);
+        TextView MTEACHER_FA_BLUE = (TextView) findViewById(R.id.blue_teacher_name);
+        TextView MCLASSNAME_FA_BLUE = (TextView) findViewById(R.id.blue_class_is);
+        //greenField_Second
+        TextView MCLOCK_SEC_green = (TextView) findViewById(R.id.green_first_clock_time);
+        TextView MAMPM_SEC_green = (TextView) findViewById(R.id.green_first_clock_am_pm);
+        ImageView MTEACHERGENDER_SEC_green = (ImageView) findViewById(R.id.green_teacher_gender);
+        TextView MTEACHER_SEC_green = (TextView) findViewById(R.id.green_teacher_name);
+        TextView MCLASSNAME_SEC_green = (TextView) findViewById(R.id.green_class_is);
+
+        //orangeField_Third
+        TextView MCLOCK_THI_orange = (TextView) findViewById(R.id.orange_first_clock_time);
+        TextView MAMPM_THI_orange = (TextView) findViewById(R.id.orange_first_clock_am_pm);
+        ImageView MTEACHERGENDER_THI_orange = (ImageView) findViewById(R.id.orange_teacher_gender);
+        TextView MTEACHER_THI_orange = (TextView) findViewById(R.id.orange_teacher_name);
+        TextView MCLASSNAME_THI_orange = (TextView) findViewById(R.id.orange_class_is);
+
+
+
+
+        Calendar cal = Calendar.getInstance();
+        String cur_fullTime;
+        TimePull tpull = new TimePull();
+        cur_fullTime = tpull.TimePull();
+
+
+        ///////******
+        //Current Day Pulling
+        TimePull day_of_day = new TimePull();
+        String reallyDy = day_of_day.DayPull();
+        //Current Day Pulling
+        //////******
+
+
+        DatabaseHelper myDbHelper = new DatabaseHelper(class_scedule_back.this);
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        try {
+            myDbHelper.openDataBase();
+        } catch (SQLException sqle) {
+            throw sqle;
+        }
+
+
+        if (reallyDy.equals(day_of_Thursday)) {
+
+            M_Th_f = myDbHelper.thursday_first_cursor("thursdayfirst", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday First Class", Toast.LENGTH_SHORT).show();
+
+            if (M_Th_f.moveToFirst()) {
+
+                MCLOCK_FA_BLUE.setText(M_Th_f.getString(0));
+                MAMPM_FA_BLUE.setText(M_Th_f.getString(1));
+                MTEACHERGENDER_FA_BLUE.setImageResource(R.drawable.ic_teacher_mam);
+                MCLASSNAME_FA_BLUE.setText(M_Th_f.getString(2));
+                MTEACHER_FA_BLUE.setText(M_Th_f.getString(3));
+
+
+            }
+
+            //Tuesday Second Class
+            M_Th_s = myDbHelper.thursday_second_cursor("thursdaysecond", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Second Class", Toast.LENGTH_SHORT).show();
+            if (M_Th_s.moveToFirst()) {
+                MCLOCK_SEC_green.setText(M_Th_s.getString(0));
+                MAMPM_SEC_green.setText(M_Th_s.getString(1));
+                MTEACHERGENDER_SEC_green.setImageResource(R.drawable.ic_teacher_male);
+                MCLASSNAME_SEC_green.setText(M_Th_s.getString(2));
+                MTEACHER_SEC_green.setText(M_Th_s.getString(3));
+
+            }
+
+            //Tuesday Third Class
+
+            M_Th_t = myDbHelper.thursday_third_cursor("thursday_third", null, null, null, null, null, null);
+            Toast.makeText(class_scedule_back.this, "Its Tuesday Third Class", Toast.LENGTH_SHORT).show();
+            if ( M_Th_t.moveToFirst()) {
+
+                MCLOCK_THI_orange.setText( M_Th_t.getString(0));
+                MAMPM_THI_orange.setText( M_Th_t.getString(1));
+                MTEACHERGENDER_THI_orange.setImageResource(R.drawable.ic_teacher_mam);
+                MCLASSNAME_THI_orange.setText( M_Th_t.getString(2));
+                MTEACHER_THI_orange.setText( M_Th_t.getString(3));
+
+
+            }
+
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
