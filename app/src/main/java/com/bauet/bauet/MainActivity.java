@@ -152,11 +152,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+      //Chat Menu Opener
+        //This Button Simply open the Class Scedule Activity
+        ImageButton chat_button = (ImageButton) findViewById(R.id.chat_system_button);
+        chat_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Chat_ActivityOpener();
+            }
+        });
+
     }
 
     //Class Scedule Activity Opener
     protected void ClassScedule_ActivityOpener() {
         Intent intent = new Intent(this, class_scedule_back.class);
+        startActivity(intent);
+    }
+
+   //Class Scedule Activity Opener
+    protected void Chat_ActivityOpener() {
+        Intent intent = new Intent(this, Chat.class);
         startActivity(intent);
     }
 
