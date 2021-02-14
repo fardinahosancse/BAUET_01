@@ -20,9 +20,9 @@
     <string name="teacher_name">Md. Akher Chowdhury</string>
 
 
-    <string name="weather_show">11</string>
+    <string name="weather_show">_____</string>
     <string name="weather_extension">°C,</string>
-    <string name="weather_location">Rajshahi</string>
+    <string name="weather_location">____</string>
 
 
 

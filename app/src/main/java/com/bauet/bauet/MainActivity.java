@@ -34,11 +34,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import  cz.msebera.android.httpclient.Header;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Calendar;
+
+import cz.msebera.android.httpclient.Header;
 
 import static com.bauet.bauet.NotificationBasedClass.CHANNEL_ID_2;
 
@@ -99,6 +109,13 @@ public class MainActivity extends AppCompatActivity {
     long MIN_TIME = 5000;
     float MIN_DISTANCE = 1000;
 
+    final String  WEATHER_URL ="http://api.openweathermap.org/data/2.5/weather";
+    final String API_ID = "3300d64afa791936f04b45ea933922bc";
+
+    TextView temp;
+    TextView city;
+    ImageView weather_icons;
+
 
     private NotificationManagerCompat NotificationManager;
 
@@ -107,7 +124,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        city = findViewById(R.id.weather_location);
+        weather_icons = findViewById(R.id.WeatherView);
+         temp = findViewById(R.id.textView);
 
+
+
+
+
+       //Full Screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
@@ -129,11 +154,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    //Class Scedule Activity Opener
     protected void ClassScedule_ActivityOpener() {
         Intent intent = new Intent(this, class_scedule_back.class);
         startActivity(intent);
     }
+
+
+
 
     //get weather for current location
     protected void getWeatherLocation() {
@@ -147,6 +175,12 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d("BAUET" , "Longitude : "  + exLongitude);
                 Log.d("BAUET" , "LAtitide : "  + exLatitude);
+
+                RequestParams params = new RequestParams();
+                params.put("lat", exLatitude);
+                params.put("lon", exLongitude);
+                params.put("appid", API_ID);
+                letsdosomenetworking(params);
 
             }
 
@@ -200,6 +234,38 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+
+  ///Request Params her
+    private void letsdosomenetworking(RequestParams params)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(WEATHER_URL,params,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode,Header[] headers,JSONObject response)
+            {
+                Log.d("BAUET","Sucess" +  response.toString());
+                WeatherDataProcess weatherData = WeatherDataProcess.fromJSONFARDIN(response);
+                updateWaatherUI(weatherData);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable fardinasif, JSONObject errorResponse) {
+             Log.d("BAUET","Fail" +fardinasif.toString() );
+             Log.d("BAUET","StatusCOde" +  statusCode);
+            }
+        });
+    }
+
+
+    private  void updateWaatherUI(WeatherDataProcess weather)
+    {
+     city.setText(weather.getCity());
+     temp.setText(weather.getTemperature());
+     int resourceID = getResources().getIdentifier(weather.getIconName(),"drawable",getPackageName());
+     weather_icons.setImageResource(resourceID);
+
     }
 
     //Auto Update of Scedule
