@@ -1,29 +1,38 @@
 package com.bauet.bauet;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import android.database.SQLException;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import android.database.Cursor;
 import android.database.SQLException;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,8 +44,7 @@ import static com.bauet.bauet.NotificationBasedClass.CHANNEL_ID_2;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
+  final int REQUEST_CODE = 123;
     //f=first
     //s=second
     //t=third
@@ -46,19 +54,19 @@ public class MainActivity extends AppCompatActivity {
     Cursor sun_s = null;
     Cursor sun_t = null;
 
- //Monday Cursor Variable
+    //Monday Cursor Variable
     Cursor mon_f = null;
     Cursor mon_s = null;
     Cursor mon_t = null;
 
- //Tuesday Cursor Variable
+    //Tuesday Cursor Variable
     Cursor Tues_f = null;
     Cursor Tues_s = null;
     Cursor Tues_t = null;
     Cursor Tues_fourth = null;
 
 
-   //Wednesday Cursor Variable
+    //Wednesday Cursor Variable
     Cursor w_f = null;
     Cursor w_s = null;
     Cursor w_t = null;
@@ -70,15 +78,10 @@ public class MainActivity extends AppCompatActivity {
     Cursor Th_t = null;
 
 
-
-
-
-
     //Day Variable- (a)
     protected TextView today;
-    protected  String day;
-    private   BroadcastReceiver minuteUpdate;
-
+    protected String day;
+    private BroadcastReceiver minuteUpdate;
 
 
     //Day Area
@@ -88,7 +91,14 @@ public class MainActivity extends AppCompatActivity {
     public String day_of_Wednesday = "Wednesday";
     public String day_of_Thursday = "Thursday";
 
-  //Main Function Area
+    //Start Location Manager and Location Listener
+    String LOCATION_PROVIDER = LocationManager.NETWORK_PROVIDER;
+    LocationManager mLocationManager;
+    LocationListener mLocationListener;
+
+    long MIN_TIME = 5000;
+    float MIN_DISTANCE = 1000;
+
 
     private NotificationManagerCompat NotificationManager;
 
@@ -97,8 +107,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NotificationManager = NotificationManagerCompat.from(this);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        NotificationManager = NotificationManagerCompat.from(this);
 
 
         DatabaseLogic();
@@ -106,24 +119,88 @@ public class MainActivity extends AppCompatActivity {
 
         //Sceondary Menu Opener
         //This Button Simply open the Class Scedule Activity
-         ImageButton class_scedule_button = (ImageButton) findViewById(R.id.class_scedule_button);
-         class_scedule_button.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-               ClassScedule_ActivityOpener();
-             }
-         });
+        ImageButton class_scedule_button = (ImageButton) findViewById(R.id.class_scedule_button);
+        class_scedule_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClassScedule_ActivityOpener();
+            }
+        });
 
     }
 
 
-    
-       protected  void ClassScedule_ActivityOpener()
-       {
-           Intent intent = new Intent(this, class_scedule_back.class);
-           startActivity(intent);
+    protected void ClassScedule_ActivityOpener() {
+        Intent intent = new Intent(this, class_scedule_back.class);
+        startActivity(intent);
+    }
+
+    //get weather for current location
+    protected void getWeatherLocation() {
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        mLocationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                Log.d("BAUET", "Enabled");
+                String exLongitude = String.valueOf(location.getLongitude());
+                String exLatitude = String.valueOf(location.getLatitude());
+
+                Log.d("BAUET" , "Longitude : "  + exLongitude);
+                Log.d("BAUET" , "LAtitide : "  + exLatitude);
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(@NonNull String provider) {
+
+            }
+
+
+            @Override
+            public void onProviderDisabled(@NonNull String provider) {
+                Log.d("BAUET", "Disabled");
+            }
+        };
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+         //Request Permission
+            ActivityCompat.requestPermissions(this,
+                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+            return;
+        }
+        mLocationManager.requestLocationUpdates(LOCATION_PROVIDER, MIN_TIME, MIN_DISTANCE, mLocationListener);
        }
 
+     //What happen after user accept or delclained permission
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == REQUEST_CODE)
+        {
+            if(grantResults.length > 0 &&  grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Log.d("BAUET","Location  PERMISSION GRANTED");
+                getWeatherLocation();
+            }
+            else
+            { Log.d("BAUET","Location PERMISSION Decleined");
+
+            }
+        }
+    }
 
     //Auto Update of Scedule
     public void startMinuteUpdate()
@@ -149,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         startMinuteUpdate();
+        getWeatherLocation();
     }
 
     @Override

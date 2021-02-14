@@ -2,7 +2,7 @@
     <string name="app_name">BAUET</string>
     <string name="Welcome_Title">Welcome</string>
     <string name="welcome_user_name">Fardin</string>
-    <string name="batch_title">BATCH:</string>
+    <string name="batch_title">Batch:</string>
     <string name="batch_name">9TH</string>
     <string name="class_schedule_title">Class Card</string>
 
@@ -18,6 +18,11 @@
     <string name="am_or_pm">AM</string>
     <string name="class_is">Math:2247</string>
     <string name="teacher_name">Md. Akher Chowdhury</string>
+
+
+    <string name="weather_show">11</string>
+    <string name="weather_extension">°C,</string>
+    <string name="weather_location">Rajshahi</string>
 
 
 
