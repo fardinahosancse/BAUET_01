@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_books_background"
+    tools:context=".books">
+
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="357dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_chat_header" />
+
+    <TextView
+        android:id="@+id/Welcome_user"
+        android:layout_width="326dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/WTTHL"
+        android:textColor="@color/dimen_white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/library_user_name"
+        android:layout_width="269dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/welcome_user_name"
+        android:textColor="@color/dimen_white"
+        android:textSize="28sp"
+        app:layout_constraintStart_toStartOf="@+id/header"
+        app:layout_constraintTop_toBottomOf="@+id/Welcome_user" />
+
+
+    <TextView
+        android:id="@+id/pre_read"
+        android:layout_width="269dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/Top_book"
+        android:textColor="@color/dimen_white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <ImageButton
+        android:id="@+id/book_01"
+        android:layout_width="357dp"
+        android:layout_height="242dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pre_read"
+        app:srcCompat="@drawable/ic_chat_header" />
+
+    <ImageView
+        android:id="@+id/book_01_cover"
+        android:layout_width="157dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="@+id/book_01"
+        app:layout_constraintTop_toTopOf="@+id/book_01"
+        app:srcCompat="@drawable/book_01" />
+
+
+    <TextView
+        android:id="@+id/book_01_name"
+        android:layout_width="174dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/book_01_info"
+        android:textAlignment="center"
+        android:textColor="@color/dimen_white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/book_01_cover"
+        app:layout_constraintTop_toTopOf="@+id/book_01" />
+
+
+    <TextView
+        android:id="@+id/book_01_info"
+        android:layout_width="175dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/book_01_info_b"
+        android:textColor="@color/dimen_white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/book_01_cover"
+        app:layout_constraintTop_toBottomOf="@+id/book_01_name" />
+
+
+    <TextView
+        android:id="@+id/book_01_edition"
+        android:layout_width="175dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/product_sans"
+        android:text="@string/book_01_edition"
+        android:textColor="@color/dimen_white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/book_01_cover"
+        app:layout_constraintTop_toBottomOf="@+id/book_01_info" />
+</androidx.constraintlayout.widget.ConstraintLayout>

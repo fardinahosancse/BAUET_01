@@ -184,11 +184,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageButton library_button = (ImageButton) findViewById(R.id.book_reader_button);
+        library_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                books();
+            }
+        });
+
 
 
     }
 
-
+    private void books()
+    {
+        Intent intent = new Intent(this, books.class);
+        startActivity(intent);
+    }
 
 
     protected void dataUI()
