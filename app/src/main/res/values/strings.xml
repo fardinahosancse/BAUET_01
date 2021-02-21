@@ -102,6 +102,8 @@
 
     <string name="test_name">Math-2247</string>
     <string name="ID">ID</string>
+    <string name="developer">Developer</string>
+    <string name="about_developer">Who are we ?</string>
     <string name="YS">Year and Semester</string>
     <string name="ys_hints">1st Year 1st Semester</string>
     <string name="ys_data">1st Year 1st Semester</string>
@@ -117,6 +119,38 @@
     <string name="books_text_02">Physics</string>
     <string name="books_text_03">Math</string>
     <string name="read">Read Now</string>
+    <string name="notice_title">Notice</string>
+    <string name="notice_notice">Unread Notice</string>
+
+    <string name="we">We</string>
+    <string name="are">Are</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="Fardin_name">Fardin Ahosan</string>
+    <string name="Fardin_department">Computer Science and Engineering </string>
+    <string name="Fardin_id">19104013</string>
+    <string name="Fardin_batch">Ninth Batch</string>
+
+    <string name="Asif_name">Asif Ishtiaque</string>
+    <string name="Asif_department">Computer Science and Engineering </string>
+    <string name="Asif_id">19104008</string>
+    <string name="Asif_batch">Ninth Batch</string>
+
+
+
+
+
 
 
 </resources>

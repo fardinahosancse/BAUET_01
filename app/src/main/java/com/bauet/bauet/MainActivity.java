@@ -190,16 +190,72 @@ public class MainActivity extends AppCompatActivity {
                 books();
             }
         });
+        ImageButton notice_button = (ImageButton) findViewById(R.id.teacher_studemt_system_button);
+        notice_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notice_opener();
+            }
+        });
+
+
+        ImageButton developer_button = (ImageButton) findViewById(R.id.notice_board_system);
+        developer_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                developer_opener();
+            }
+        });
 
 
 
     }
 
+
+
+    ////Library Activity Opener
     private void books()
     {
         Intent intent = new Intent(this, books.class);
         startActivity(intent);
     }
+
+
+    ////Libraru Activity Opener
+    private void notice_opener()
+    {
+        Intent intent = new Intent(this, notice.class);
+        startActivity(intent);
+    }
+
+    //Class Scedule Activity Opener
+    protected void ClassScedule_ActivityOpener() {
+        Intent intent = new Intent(this, class_scedule_back.class);
+        startActivity(intent);
+    }
+
+    //Chat Activity Opener
+    protected void Chat_ActivityOpener() {
+        Intent intent = new Intent(this, Chat.class);
+        startActivity(intent);
+    }
+
+    //Exam Menu Opener
+    protected  void exam_activity()
+    {
+        Intent intent = new Intent(this, exam.class);
+        startActivity(intent);
+    }
+
+    //Developer Activity Opener
+    protected  void  developer_opener()
+    {
+        Intent intent = new Intent(this, developer.class);
+        startActivity(intent);
+    }
+
+
+
 
 
     protected void dataUI()
@@ -237,25 +293,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //Class Scedule Activity Opener
-    protected void ClassScedule_ActivityOpener() {
-        Intent intent = new Intent(this, class_scedule_back.class);
-        startActivity(intent);
-    }
-
-   //Class Scedule Activity Opener
-    protected void Chat_ActivityOpener() {
-        Intent intent = new Intent(this, Chat.class);
-        startActivity(intent);
-    }
-
-    //Exam Menu Opener
-
-    protected  void exam_activity()
-    {
-        Intent intent = new Intent(this, exam.class);
-        startActivity(intent);
-    }
 
 
 
