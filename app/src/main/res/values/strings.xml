@@ -96,7 +96,8 @@
     <string name="book_01_info_b">Core Java by Cay S. Horstmann and Gary Cornell was originally published in the Java series of Sun Microsystems Press and is now published by Prentice-Hall </string>
     <string name="book_01_edition">10TH EDITION </string>
     <string name="WTTHL">Welcome to The BAUET Online Library </string>
-    <string name="Top_book">Top Trending Book :</string>
+    <string name="Top_book">Featured :</string>
+    <string name="all_books">All Books :</string>
 
 
     <string name="test_name">Math-2247</string>
@@ -110,6 +111,12 @@
     <string name="enter_exam">Enter Test Zone</string>
     <string name="today_exam_title">Todays Class Test</string>
     <string name="select_pdf">Select Pdf From Storage</string>
+
+
+    <string name="books_text_01">Programming</string>
+    <string name="books_text_02">Physics</string>
+    <string name="books_text_03">Math</string>
+    <string name="read">Read Now</string>
 
 
 </resources>

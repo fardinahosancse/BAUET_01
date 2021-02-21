@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
 
 
        //Pulling from Local Saved Data and Showing in main Menu
-        setUpDisplayName();
         dataUI();
 
 
@@ -209,6 +208,9 @@ public class MainActivity extends AppCompatActivity {
         TextView mid;
         TextView mys;
 
+        TextView username_text_field =(TextView) findViewById(R.id.Welcome_user_name);
+        TextView chat_actie_user =(TextView) findViewById(R.id.chat_active_name);
+
         mbatch = (TextView)findViewById(R.id.batch_name);
         mid = (TextView)findViewById(R.id.apner_id_ti_bolun_field);
         mys = (TextView)findViewById(R.id.ys);
@@ -217,8 +219,11 @@ public class MainActivity extends AppCompatActivity {
         String id =fardin.getString("idLS","");
         String batch =fardin.getString("batchLS","");
         String ys =fardin.getString("ysLS","");
+        String name =fardin.getString("usernameLS","");
 
 
+        username_text_field.setText(name);
+        chat_actie_user.setText(name);
         mbatch.setText(batch);
         mid.setText(id);
         mys.setText(ys);
@@ -226,10 +231,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
 
@@ -318,24 +319,7 @@ public class MainActivity extends AppCompatActivity {
         mLocationManager.requestLocationUpdates(LOCATION_PROVIDER, MIN_TIME, MIN_DISTANCE, mLocationListener);
        }
 
-///Display Name Setup
-    private void setUpDisplayName()
-    {
-        TextView username_text_field =(TextView) findViewById(R.id.Welcome_user_name);
-        TextView chat_actie_user =(TextView) findViewById(R.id.chat_active_name);
 
-        SharedPreferences perfs =  getSharedPreferences(Register.CHAT_PREFS, MODE_PRIVATE);
-        mDisplayName = perfs.getString(Register.DISPLAY_NAME_KEY,null);
-        if(mDisplayName == null)
-        {
-            mDisplayName ="Anonymous";
-        }
-        else
-        {
-              username_text_field.setText(mDisplayName);
-              chat_actie_user.setText(mDisplayName);
-        }
-    }
 
 
 

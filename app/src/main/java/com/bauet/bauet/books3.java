@@ -25,7 +25,8 @@ import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class booksViewer extends AppCompatActivity {
+public class books3 extends AppCompatActivity {
+
 
     final  String books_01_path ="-MU--vDJWpKl3WyKyhYs";
     final private  String books_02_path ="-MU2KoRCwZjx6mFeMycR";
@@ -36,7 +37,7 @@ public class booksViewer extends AppCompatActivity {
     private TextView codV;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference =mDatabase.getReference("PDF ANSWER SHEET");
-    DatabaseReference mChild =  mDatabaseReference.child("-MU--vDJWpKl3WyKyhYs");
+    DatabaseReference mChild =  mDatabaseReference.child("-MU2Kxf00ZArYEktyCB8");
     DatabaseReference urlRead = mChild.child("url");
     ProgressDialog progressDialog;
 
@@ -48,7 +49,7 @@ public class booksViewer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_books_viewer);
+        setContentView(R.layout.activity_books3);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -59,25 +60,25 @@ public class booksViewer extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                progressDialog = new ProgressDialog(booksViewer.this);
+                progressDialog = new ProgressDialog(books3.this);
                 progressDialog.setTitle("Downloading");
-                progressDialog.setMessage("Core Java by Cay S. Horstmann and Gary Cornell");
+                progressDialog.setMessage("CSharp Notes For Professionals");
                 progressDialog.closeOptionsMenu();
                 progressDialog.show();
 
 
                 String value = snapshot.getValue(String.class);
                 codV.setText(value);
-                Toast.makeText(booksViewer.this, "UPDATED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(books3.this, "UPDATED", Toast.LENGTH_SHORT).show();
                 String url = codV.getText().toString();
-                new booksViewer.RetrivePdfStream().execute(url);
+                new books3.RetrivePdfStream().execute(url);
 
             }
 
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(booksViewer.this, "FAILED TO LOAD", Toast.LENGTH_SHORT).show();
+                Toast.makeText(books3.this, "FAILED TO LOAD", Toast.LENGTH_SHORT).show();
 
             }
         });}
